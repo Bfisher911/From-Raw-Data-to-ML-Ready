@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infographic: ML Data Preparation with BigQuery & Colab</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .flow-arrow {
+            font-size: 2.5rem;
+            line-height: 1;
+            color: #94d2bd;
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            padding: 1.5rem;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        .kpi-value {
+            font-weight: 900;
+            color: #0a9396;
+        }
+        .kpi-label {
+            font-weight: 600;
+            color: #005f73;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+
+        <header class="text-center my-8 md:my-12">
+            <h1 class="text-4xl md:text-6xl font-black text-[#005f73] tracking-tight">From Raw Data to ML-Ready</h1>
+            <p class="text-xl md:text-2xl text-[#0a9396] mt-2 font-semibold">A Reproducible Data Preparation Workflow with Colab & BigQuery</p>
+        </header>
+
+        <main class="space-y-16">
+
+            <section id="mission" class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+                <div class="md:col-span-2 card bg-[#005f73] text-white">
+                    <h2 class="text-3xl font-bold text-white mb-4">The Mission: Predict a "Big Tip"</h2>
+                    <p class="text-lg text-slate-200">
+                        The goal is to build a machine learning model that predicts if a New York City taxi ride will result in a generous tip (20% or more of the fare). But before any model can be trained, we must first transform a massive, raw public dataset into a clean, structured, and feature-rich format suitable for machine learning. This infographic visualizes that critical preparation process.
+                    </p>
+                </div>
+                <div class="card text-center">
+                     <h3 class="text-2xl font-bold text-[#005f73] mb-4">Core Technologies</h3>
+                     <div class="flex justify-around items-center">
+                        <div class="text-center">
+                            <span class="text-6xl">📝</span>
+                            <p class="mt-2 font-semibold text-lg">Google Colab</p>
+                            <p class="text-sm text-slate-500">For a reproducible, code-based workflow.</p>
+                        </div>
+                        <div class="text-center">
+                            <span class="text-6xl">💾</span>
+                            <p class="mt-2 font-semibold text-lg">BigQuery</p>
+                            <p class="text-sm text-slate-500">For scalable, serverless data warehousing.</p>
+                        </div>
+                     </div>
+                </div>
+            </section>
+
+            <section id="pipeline" class="card md:col-span-2">
+                <h2 class="text-3xl font-bold text-center text-[#005f73] mb-8">The End-to-End Data Pipeline</h2>
+                <div class="flex flex-col items-center space-y-4">
+
+                    <div class="w-full max-w-md text-center p-4 border-4 border-dashed border-[#e9d8a6] rounded-lg">
+                        <p class="font-bold text-xl text-[#ca6702]">START</p>
+                        <p class="font-semibold text-lg text-[#005f73]">Raw Public Data: NYC Taxi Trips</p>
+                        <p class="text-sm text-slate-500">A massive, multi-year dataset.</p>
+                    </div>
+
+                    <div class="flow-arrow">↓</div>
+
+                    <div class="w-full max-w-xl text-center p-4 bg-[#f0f9ff] border-2 border-[#94d2bd] rounded-lg shadow-sm">
+                        <p class="font-bold text-xl text-[#0a9396]">1. Authenticate & Filter</p>
+                        <p class="text-md text-slate-600">Securely connect Colab to BigQuery and select only trips from 2022.</p>
+                        <div class="mt-4 bg-white p-4 rounded-lg inline-block shadow-inner">
+                            <p class="text-4xl kpi-value">~15 GB</p>
+                            <p class="kpi-label">Data Scanned</p>
+                        </div>
+                    </div>
+
+                    <div class="flow-arrow">↓</div>
+
+                    <div class="w-full max-w-xl text-center p-4 bg-[#f0f9ff] border-2 border-[#94d2bd] rounded-lg shadow-sm">
+                        <p class="font-bold text-xl text-[#0a9396]">2. Prune & Engineer Features</p>
+                        <p class="text-md text-slate-600">Select only essential columns and create new, more informative features from the raw data.</p>
+                    </div>
+
+                    <div class="flow-arrow">↓</div>
+
+                    <div class="w-full max-w-xl text-center p-4 bg-[#fffbeb] border-2 border-[#ee9b00] rounded-lg shadow-sm">
+                        <p class="font-bold text-xl text-[#ca6702]">3. The Critical Split</p>
+                        <p class="text-md text-slate-600">Divide the data into training and evaluation sets using a deterministic hashing function for reproducibility.</p>
+                    </div>
+
+                    <div class="flow-arrow">↓</div>
+
+                    <div class="w-full max-w-md text-center p-4 border-4 border-dashed border-[#94d2bd] rounded-lg">
+                        <p class="font-bold text-xl text-[#0a9396]">END</p>
+                        <p class="font-semibold text-lg text-[#005f73]">Verified, ML-Ready Datasets</p>
+                        <p class="text-sm text-slate-500">Two separate tables: 80% for Training, 20% for Evaluation.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="feature-engineering" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="md:col-span-2 text-center">
+                     <h2 class="text-3xl font-bold text-[#005f73]">The Art of Feature Engineering</h2>
+                     <p class="text-lg text-slate-600 mt-2 max-w-3xl mx-auto">We didn't just copy the data; we enriched it. Feature engineering is the process of using domain knowledge to create new input variables that make machine learning algorithms work better.</p>
+                </div>
+                <div class="card">
+                    <h3 class="font-bold text-xl text-[#0a9396]">Trip Distance (km)</h3>
+                    <p class="mt-2 text-slate-600">Converted `trip_distance` from imperial (miles) to metric (kilometers) for standardization. <br><code class="text-sm bg-slate-100 p-1 rounded">trip_distance * 1.60934</code></p>
+                </div>
+                <div class="card">
+                    <h3 class="font-bold text-xl text-[#0a9396]">Tip Percentage</h3>
+                    <p class="mt-2 text-slate-600">Calculated the tip as a percentage of the fare, which is more informative than the raw tip amount. <br><code class="text-sm bg-slate-100 p-1 rounded">SAFE_DIVIDE(tip_amount, fare_amount)</code></p>
+                </div>
+                 <div class="card bg-[#e9d8a6]">
+                    <h3 class="font-bold text-xl text-[#ca6702]">Target Label: `is_big_tip`</h3>
+                    <p class="mt-2 text-slate-700">Created the most critical feature: our binary target variable. A value of `1` means a big tip (>=20%), and `0` means it wasn't. This is what the model will learn to predict.</p>
+                </div>
+                <div class="card">
+                    <h3 class="font-bold text-xl text-[#0a9396]">Trip Duration (Minutes)</h3>
+                    <p class="mt-2 text-slate-600">Calculated the total trip time in minutes from the start and end timestamps, a feature that is likely more predictive than the raw timestamps themselves.</p>
+                </div>
+            </section>
+
+            <section id="reproducibility">
+                <div class="text-center mb-8">
+                     <h2 class="text-3xl font-bold text-[#005f73]">Reproducibility is Non-Negotiable</h2>
+                     <p class="text-lg text-slate-600 mt-2 max-w-3xl mx-auto">To create reliable models, every experiment must be reproducible. The method used to split data is crucial.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="card border-4 border-[#bb3e03]">
+                        <h3 class="text-2xl font-bold text-[#bb3e03] mb-2">❌ The Wrong Way: `RAND()`</h3>
+                        <p class="text-slate-600 mb-4">Using a random function like `RAND()` is a common mistake. It's **non-deterministic**, meaning it produces a different split every time you run the query.</p>
+                        <div class="text-center p-4 bg-red-50 rounded-lg">
+                            <p class="font-bold text-lg">Result: Chaos</p>
+                            <p>You can't reliably compare Model A to Model B because you don't know if performance changes are due to model improvements or just a luckier data split. Your results are not trustworthy.</p>
+                        </div>
+                    </div>
+                    <div class="card border-4 border-[#0a9396]">
+                        <h3 class="text-2xl font-bold text-[#0a9396] mb-2">✅ The Right Way: `FARM_FINGERPRINT`</h3>
+                        <p class="text-slate-600 mb-4">Using a hashing function like `FARM_FINGERPRINT` is **deterministic**. For the same input (e.g., a trip's unique timestamp), it *always* produces the same output number.</p>
+                        <div class="text-center p-4 bg-teal-50 rounded-lg">
+                            <p class="font-bold text-lg">Result: Consistency</p>
+                            <p>Every time the query runs, each row is assigned to the exact same split (train or eval). This guarantees that your experiments are fair, comparable, and scientifically valid.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="verification" class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                 <div class="text-center md:text-left">
+                     <h2 class="text-3xl font-bold text-[#005f73]">Trust, But Verify Programmatically</h2>
+                     <p class="text-lg text-slate-600 mt-2">A good data scientist doesn't just run code; they verify the results. Instead of manual checks in a UI, we use programmatic queries to confirm our data pipeline worked as expected.</p>
+                </div>
+                <div class="card">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 items-center">
+                        <div class="chart-container mx-auto max-w-xs">
+                            <canvas id="splitDonutChart"></canvas>
+                        </div>
+                        <div class="chart-container mx-auto">
+                            <canvas id="splitBarChart"></canvas>
+                        </div>
+                    </div>
+                    <p class="text-center text-sm text-slate-500 mt-4">Visual confirmation of the 80/20 data split and the final row counts in each table.</p>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="text-center mt-16 py-8 border-t border-slate-200">
+            <p class="text-slate-500">Infographic created to visualize the concepts from the "ML Data Preparation in the Cloud" lab.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const wrapLabel = (label) => {
+                const maxLen = 16;
+                if (label.length <= maxLen) {
+                    return label;
+                }
+                const words = label.split(' ');
+                const lines = [];
+                let currentLine = '';
+                for (const word of words) {
+                    if ((currentLine + ' ' + word).length > maxLen) {
+                        lines.push(currentLine);
+                        currentLine = word;
+                    } else {
+                        currentLine += (currentLine ? ' ' : '') + word;
+                    }
+                }
+                lines.push(currentLine);
+                return lines;
+            };
+
+            const tooltipTitleCallback = (tooltipItems) => {
+                const item = tooltipItems[0];
+                let label = item.chart.data.labels[item.dataIndex];
+                if (Array.isArray(label)) {
+                  return label.join(' ');
+                } else {
+                  return label;
+                }
+            };
+            
+            const brilliantBlues = {
+                darkTeal: '#005f73',
+                mediumTeal: '#0a9396',
+                lightTeal: '#94d2bd',
+                paleGold: '#e9d8a6',
+                goldOrange: '#ee9b00'
+            };
+
+            const donutCtx = document.getElementById('splitDonutChart').getContext('2d');
+            new Chart(donutCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Training Set', 'Evaluation Set'],
+                    datasets: [{
+                        label: 'Data Split',
+                        data: [80, 20],
+                        backgroundColor: [brilliantBlues.mediumTeal, brilliantBlues.paleGold],
+                        borderColor: ['#ffffff'],
+                        borderWidth: 4,
+                        hoverOffset: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                font: {
+                                    family: 'Inter',
+                                    size: 14
+                                }
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Data Split Ratio',
+                            font: {
+                                family: 'Inter',
+                                size: 16,
+                                weight: 'bold'
+                            },
+                            color: brilliantBlues.darkTeal
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: tooltipTitleCallback
+                            }
+                        }
+                    },
+                    cutout: '60%'
+                }
+            });
+
+            const barCtx = document.getElementById('splitBarChart').getContext('2d');
+            new Chart(barCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Training Set (80%)', 'Evaluation Set (20%)'],
+                    datasets: [{
+                        label: 'Row Count',
+                        data: [29536519, 7385206],
+                        backgroundColor: [brilliantBlues.mediumTeal, brilliantBlues.paleGold],
+                        borderColor: [brilliantBlues.darkTeal, brilliantBlues.goldOrange],
+                        borderWidth: 2,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        title: {
+                            display: true,
+                            text: 'Verified Row Counts',
+                            font: {
+                                family: 'Inter',
+                                size: 16,
+                                weight: 'bold'
+                            },
+                            color: brilliantBlues.darkTeal
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: tooltipTitleCallback
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return (value / 1e6) + 'M';
+                                },
+                                font: {
+                                    family: 'Inter'
+                                }
+                            }
+                        },
+                        y: {
+                             ticks: {
+                                font: {
+                                    family: 'Inter'
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
